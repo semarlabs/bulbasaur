@@ -1,0 +1,13 @@
+# Stops on the first failure
+stop_on_failure: true
+
+# All feature file paths
+features_path:
+  - ./features
+
+# List of resources for application dependencies
+resources:
+  - name: bulba-api
+    type: httpclient
+    options:
+      base_url: http://127.0.0.1:8081
