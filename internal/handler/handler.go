@@ -4,6 +4,7 @@ import (
 	"bulbasaur/internal/config"
 	clientHandler "bulbasaur/internal/handler/httpclient"
 	"bulbasaur/internal/resources"
+	"bulbasaur/internal/shared/constants"
 	"github.com/cucumber/godog"
 )
 
@@ -31,7 +32,7 @@ func (h *handler) RegisterResource(cfg *config.Resource, res resources.Resource)
 	h.resources[cfg.Name] = res
 
 	switch cfg.Type {
-	case "httpclient":
+	case constants.ResHttpClient:
 		h.httpClientResources[cfg.Name] = res.(resources.ClientResource)
 	}
 

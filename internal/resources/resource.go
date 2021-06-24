@@ -3,6 +3,7 @@ package resources
 import (
 	"bulbasaur/internal/config"
 	"bulbasaur/internal/resources/httpclient"
+	"bulbasaur/internal/shared/constants"
 	"fmt"
 	"net/http"
 )
@@ -23,7 +24,7 @@ type ClientResource interface {
 
 func Create(cfg *config.Resource) (Resource, error) {
 	switch cfg.Type {
-	case "httpclient":
+	case constants.ResHttpClient:
 		return httpclient.New(cfg)
 	default:
 		return nil, fmt.Errorf("resource type not found: %s", cfg.Type)

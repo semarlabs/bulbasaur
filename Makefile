@@ -1,7 +1,6 @@
-BINDIR := $(CURDIR)/bin
 
 build:
-	go build -o '$(BINDIR)'/bulbasaur ./cmd/http/main.go
+	go build -o ./bin/bulbasaur ./cmd/cli/main.go
 
 run: 
 	go run cmd/cli/main.go
