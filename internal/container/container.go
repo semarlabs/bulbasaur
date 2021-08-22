@@ -30,7 +30,7 @@ func Init(cfgPath string) {
 	godog := godog.TestSuite{
 		Name: "bulbasaur",
 		Options: &godog.Options{
-			Format:        "progress",
+			Format:        "pretty",
 			Output:        colors.Colored(reports.New()),
 			Paths:         cfg.FeaturesPaths,
 			StopOnFailure: cfg.StopOnFailure,

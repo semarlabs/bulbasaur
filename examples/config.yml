@@ -10,4 +10,4 @@ resources:
   - name: bulba-api
     type: httpclient
     options:
-      base_url: http://127.0.0.1:8081
+      base_url: https://rackspira.id/
