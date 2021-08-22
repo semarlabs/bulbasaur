@@ -51,7 +51,7 @@ Feature: Check my application's status endpoint
     Then "your-resource-name" response code should be 200
 ```
 
-### Run tomato
+### How to Run
 ```sh
 bulbasaur config.yml
 ```
