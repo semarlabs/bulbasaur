@@ -19,6 +19,7 @@ type ClientResource interface {
 	Resource
 	SetRequestHeader(key, value string) error
 	Request(method, path string, body []byte) (err error)
+	RequestFromFile(method, path string, fileName string) (err error)
 	GetResponse() (int, http.Header, []byte, error)
 }
 

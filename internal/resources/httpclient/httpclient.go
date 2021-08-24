@@ -2,6 +2,7 @@ package httpclient
 
 import (
 	"bulbasaur/internal/config"
+	"bulbasaur/internal/files"
 	"bytes"
 	"errors"
 	"fmt"
@@ -23,6 +24,7 @@ type Client struct {
 	baseUrl    string
 	reqHeaders http.Header
 	response   *response
+	fileDir    files.FileDir
 }
 
 var defaultHeaders = http.Header{}
@@ -57,6 +59,14 @@ func New(cfg *config.Resource) (client *Client, err error) {
 				}
 				defaultHeaders.Set(str[0], str[1])
 			}
+
+		case "file_dir":
+			files := files.New()
+			if err = files.Pickup(val); err != nil {
+				return
+			}
+
+			client.fileDir = files
 		default:
 			err = errors.New(fmt.Sprintf("invalid parameter: %s", key))
 		}
@@ -119,6 +129,15 @@ func (c *Client) Request(method, path string, body []byte) (err error) {
 
 	c.response = &response{resp.StatusCode, resp.Header, body}
 	return
+}
+
+func (c *Client) RequestFromFile(method, path string, fileName string) (err error) {
+	body, ok := c.fileDir.GetContent(fileName)
+	if ok {
+		return c.Request(method, path, body)
+	}
+
+	return errors.New(fmt.Sprintf("file with name '%s' not found", fileName))
 }
 
 func (c *Client) GetResponse() (statusCode int, headers http.Header, body []byte, err error) {
